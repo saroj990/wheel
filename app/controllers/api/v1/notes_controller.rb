@@ -31,7 +31,7 @@ class Api::V1::NotesController < Api::V1::BaseController
   private
 
     def note_params
-      params.require(:note).permit([ :title, :description]).to_h
+      params.require(:note).permit([ :title, :description, :status, :priority ]).to_h
     end
 
     def load_note
