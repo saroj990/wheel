@@ -7,7 +7,7 @@ import { either, isEmpty, isNil } from "ramda";
 import { initializeLogger } from "common/logger";
 import { setAuthHeaders, registerIntercepts } from "apis/axios";
 import { PageLoader } from "neetoui";
-import Dashboard from "components/Dashboard";
+import Dashboard from "components/Dashboard/Tasks";
 
 import PrivateRoute from "components/Common/PrivateRoute";
 import PasswordReset from "components/Authentication/ResetPassword";
