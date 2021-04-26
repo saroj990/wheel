@@ -1,8 +1,9 @@
-import React,  { useState, useEffect } from 'react';
-import { Checkbox, Badge } from "neetoui";
+import React, { useState, useEffect } from 'react';
+import { Checkbox, Badge, Button } from "neetoui";
+import DeleteTask from './DeleteTask';
 
 
-const List = ({tasks, selectedTaskIds, setSelectedTaskIds}) => {
+const List = ({ tasks, selectedTaskIds, setSelectedTaskIds, setShowDeleteAlert }) => {
 
   const isSelected = (id) => selectedTaskIds.includes(id);
 
@@ -20,7 +21,7 @@ const List = ({tasks, selectedTaskIds, setSelectedTaskIds}) => {
     }
   };
 
-  const allTasksSelected = () =>  selectedTaskIds.length === tasks.map(task => task.id).length;
+  const allTasksSelected = () => selectedTaskIds.length === tasks.map(task => task.id).length;
 
   const toggleAllCheckBoxes = () => {
     const ids = tasks.map(task => task.id);
@@ -40,13 +41,13 @@ const List = ({tasks, selectedTaskIds, setSelectedTaskIds}) => {
             <p>
               <span className="text-blue-400 text-lg"> You have </span>
               <Badge color="red">
-              { tasks.length}
+                {tasks.length}
               </Badge>
               <span className="text-blue-400 text-lg"> tasks left!! hurry up! finish them up to earn a hero badge.</span>
             </p>
           )}
-        </p>
-       <table className="nui-table nui-table--checkbox">
+      </p>
+      <table className="nui-table nui-table--checkbox">
         <thead>
           <tr>
             <th>
@@ -59,6 +60,7 @@ const List = ({tasks, selectedTaskIds, setSelectedTaskIds}) => {
             <th className="text-left">Description</th>
             <th className="text-left">Status</th>
             <th className="text-left">Priority</th>
+            <th className="text-left">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -68,7 +70,7 @@ const List = ({tasks, selectedTaskIds, setSelectedTaskIds}) => {
               className={"cursor-pointer bg-white hover:bg-gray-50"}
             >
               <td>
-              <Checkbox
+                <Checkbox
                   id={task.id}
                   checked={isSelected(task.id)}
                   onClick={(e) => onSelectingTaskCheckbox(e, task.id)}
@@ -82,6 +84,7 @@ const List = ({tasks, selectedTaskIds, setSelectedTaskIds}) => {
               <td>{task.description}</td>
               <td>{task.status}</td>
               <td>{task.priority}</td>
+              <td><Button style="icon" icon="ri-delete-bin-line" disabled={!isSelected(task.id)} onClick={() => setShowDeleteAlert(true)} /> </td>
             </tr>
           ))}
         </tbody>
